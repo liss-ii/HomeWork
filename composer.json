@@ -1,0 +1,6 @@
+{
+    "require": {
+        "katzgrau/klogger": "dev-master",
+        "sagrishin/lightweight-php-orm": "^1.3"
+    }
+}
