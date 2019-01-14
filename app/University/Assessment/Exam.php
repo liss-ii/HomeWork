@@ -2,7 +2,7 @@
 
 namespace app\University\Assessment;
 
-class Exam extends сAssessment
+class Exam extends Assessment
 {
     /**
      * @param string $Letter

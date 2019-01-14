@@ -1,15 +1,7 @@
 <?php
 
-//ini_set('include_path', DIR);
-include_once 'app/University/Session/SessionInterface.php';
-include_once 'app/University/Assessment/AssessmentInterface.php';
-include_once 'app/University/Person/Person.php';
-include_once 'app/University/Person/Student.php';
-include_once 'app/University/Person/Teacher.php';
-include_once 'app/University/Assessment/Assessment.php';
-include_once 'app/University/Assessment/Exam.php';
-include_once 'app/University/Assessment/Credit.php';
-include_once 'app/University/Session/Session.php';
+const DOCKROOT = __DIR__;
+include_once __DIR__ . "/vendor/autoload.php";
 
 $stud = new app\University\Person\Student();
 $stud->setName('Ivan', 'Ivanovich', 'Ivanov');
