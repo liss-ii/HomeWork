@@ -17,6 +17,7 @@ class ComposerStaticInitdc1ac32ed9aa6804cb6ec99bf18234de
         ),
         'K' => 
         array (
+            'Klein\\' => 6,
             'Katzgrau\\KLogger\\' => 17,
         ),
     );
@@ -29,6 +30,10 @@ class ComposerStaticInitdc1ac32ed9aa6804cb6ec99bf18234de
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Klein\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/klein/klein/src/Klein',
         ),
         'Katzgrau\\KLogger\\' => 
         array (

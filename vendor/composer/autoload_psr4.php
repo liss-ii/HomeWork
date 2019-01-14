@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'orm\\' => array($vendorDir . '/sagrishin/lightweight-php-orm/lib/orm'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),
     'Katzgrau\\KLogger\\' => array($vendorDir . '/katzgrau/klogger/src'),
 );
