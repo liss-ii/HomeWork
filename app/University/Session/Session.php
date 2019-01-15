@@ -107,7 +107,7 @@ class Session extends AbstractModel implements SessionInterface
         if ($exam->getScores() >  35) {
             $this->exams[] = $exam;
         } else {
-            echo "<br>This exam didn't pass<br>";
+            echo "<br>This exam not passed<br>";
         }
     }
 
@@ -127,7 +127,7 @@ class Session extends AbstractModel implements SessionInterface
         if ($credit->getScores() >  35) {
             $this->credits[] = $credit;
         } else {
-            echo "<br>This credit didn't pass<br>";
+            echo "<br>This credit not passed<br>";
         }
     }
 }
