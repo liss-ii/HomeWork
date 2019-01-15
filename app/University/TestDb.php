@@ -14,9 +14,15 @@ class TestDb extends Table
     /**
      * @var string
      */
-    public $name;
+    public $firstname;
 
     /**
+     * @var  string
+     */
+    public $lastname;
+
+    /**
+     *
      * @var string
      */
     public $surname;
@@ -26,9 +32,10 @@ class TestDb extends Table
      */
     public function __construct()
     {
-        $this->table_name = "table_name";
+        $this->table_name = "student";
         $this->id = Field::primaryKey();
-        $this->name = Field::varchar(255);
+        $this->firstname = Field::varchar(255);
+        $this->lastname = Field::varchar(255);
         $this->surname = Field::varchar(255);
         $this->initTable();
     }

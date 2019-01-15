@@ -1,18 +1,18 @@
 <?php
-namespace app\University\Assessment;
+namespace University\Assessment;
 
 interface AssessmentInterface
 {
-    /**
-     * @param float $scores
-     * @return string
-     */
-    public function getResultLetter($scores);
+
 
     /**
-     * @param  string $letter
      * @return string
      */
-   // public function getGrade($letter);
+    public function getLetter();
+
+    /**
+     * @return string
+     */
+    public function getGrade();
 
 }

@@ -11,7 +11,7 @@ use orm\DataBase\AbstractDataBase;
 final class Database extends AbstractDataBase
 {
     public $dbtype = "mysql";
-    public $dbname = "newbase";
+    public $dbname = "university";
     public $user = "root";
     public $password = "root";
 }

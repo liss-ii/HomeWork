@@ -1,6 +1,6 @@
 <?php
 
-namespace app\University\Person;
+namespace University\Person;
 
 class Student extends Person
 {
