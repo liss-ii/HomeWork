@@ -6,9 +6,9 @@ use orm\DataBase\AbstractDataBase;
 
 /**
  * Class Database
- * @package Shop
+ * @package University
  */
-final class Database extends AbstractDataBase
+final class Database1 extends AbstractDataBase
 {
     public $dbtype = "mysql";
     public $dbname = "university";

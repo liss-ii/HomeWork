@@ -5,7 +5,8 @@ namespace University\Person;
 class Student extends Person
 {
     /**
-     * @var $knowledgelevel int
+     * @var int
+     * @field
      */
     private $knowledgelevel;
 

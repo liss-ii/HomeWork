@@ -2,46 +2,39 @@
 
 namespace University\Services\Persistence;
 
+use Aiirport\Services\Persistence\CustomMysqlQueryGenerator;
 use orm\DataBase\Table;
 use orm\DataBase\Field;
 use orm\DataBase\fields\PrimaryKey;
 use orm\DataBase\fields\ForeignKey;
 use orm\Query\QueryMemento;
 use orm\Query\QueryExecutor;
-use orm\Exceptions\QueryGenerationException;
 use orm\Exceptions\MigrationException;
-use University\Services\Persistence\NotFoundException;
-
 /**
  * Class Resource
- * @package Shop
+ * @package Airport
  */
 abstract class Resource extends Table
 {
-
     /**
      * @var array
      */
     private $table_fields = [];
-
     /**
      * @var \ReflectionClass
      */
     protected $reflection_class;
-
     /**
      * @var
      */
     protected $model;
-
     /**
-     * @param \University\Services\Model\PersistebleEntityInterface $model
+     * @param \University\Services\Model\PersistableEntityInterface $model
      */
-    public function setModel(\University\Services\Model\PersistebleEntityInterface $model)
+    public function setModel(\University\Services\Model\PersistableEntityInterface $model)
     {
         $this->model = $model;
     }
-
     /**
      * Init table, set fields' types and set name of table
      */
@@ -53,7 +46,6 @@ abstract class Resource extends Table
             $this->table_name = (new \ReflectionClass($this))->getShortName();
         }
     }
-
     /**
      * @param $value
      * @param string $field
@@ -72,14 +64,14 @@ abstract class Resource extends Table
                     $this->model->$setterName($value);
                 }
             }
-        } else{
-            //throw  new NotFoundException();
+            $this->afterLoad();
+        } else {
+            throw new \Exception('Entity not found');
         }
     }
-
     /**
      * @param array $params
-     * @return array
+     * @return \Airport\Services\Model\PersistableEntityInterface[]
      */
     public function getCollection($params = [])
     {
@@ -90,10 +82,8 @@ abstract class Resource extends Table
             $pdo_statement = $this->getQueryGeneratorInstance()
                 ->selectAll($this->table_name);
         }
-
         $query_executor = new QueryExecutor($pdo_statement, $params);
         $result = $query_executor->select();
-
         if (count($result)) {
             $collection = [];
             foreach ($result as $item) {
@@ -108,12 +98,10 @@ abstract class Resource extends Table
             }
             return $collection;
         }
-
         return [];
     }
-
     /**
-     * @throws \orm\Exceptions\QueryGenerationException
+     * @throws \Exception
      */
     public function save()
     {
@@ -126,11 +114,10 @@ abstract class Resource extends Table
                 array_map(function ($key) {return ":{$key}";}, array_keys($data)),
                 array_values($data)));
             $this->updateValueOfPrimaryKey($query_executor->insertOrUpdate());
-        } catch (\PDOException $e) {
-            throw new QueryGenerationException($e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
     }
-
     /**
      * @return bool
      * @throws MigrationException
@@ -138,15 +125,14 @@ abstract class Resource extends Table
     public function migrate()
     {
         try {
-            $generator = $this->getQueryGeneratorInstance();
+            $generator = $this->getCustomQueryGeneratorInstance();
             (new QueryExecutor($generator->createTable($this->table_name, $this->table_fields), []))
                 ->executeSql();
             return true;
-        } catch (\PDOException $e) {
-            throw new MigrationException($e->getMessage());
+        } catch (\Exception $e) {
+           // throw new MigrationException($e->getMessage());
         }
     }
-
     /**
      * @param bool $addPrimaryKeyFlag
      * @return array
@@ -155,11 +141,8 @@ abstract class Resource extends Table
     {
         $storage = [];
         foreach ($this->reflection_class->getProperties() as $field) {
-
             $fieldType = $this->getField($field);
-
             if ($fieldType === false) continue;
-
             if (!$addPrimaryKeyFlag && $fieldType instanceof PrimaryKey) {
                 continue;
             }
@@ -175,7 +158,6 @@ abstract class Resource extends Table
         }
         return $storage;
     }
-
     /**
      * @return array
      */
@@ -184,15 +166,12 @@ abstract class Resource extends Table
         $data = [];
         foreach ($this->reflection_class->getProperties() as $field) {
             $fieldType = $this->getField($field);
-
             if ($fieldType === false) continue;
             $getterName = 'get' . ucfirst($field->name);
             $data[$field->name] = $this->model->$getterName();
         }
-
         return $data;
     }
-
     /**
      * @param $field
      * @return array|bool
@@ -204,46 +183,36 @@ abstract class Resource extends Table
         $isField = false;
         $type = [];
         foreach ($annotation as $line) {
-
             if (strpos($line, '@') === false) {
                 continue;
             }
-
             if (strpos($line, '@field') !== false) {
                 $isField = true;
             }
-
             if (strpos($line, '@primary') !== false) {
                 $type['type'] =  "primary";
             }
-
             if (strpos($line, '@var') !== false) {
                 if (!isset($type['type'])){
                     $type['type'] = trim(substr($line, strpos($line, '@var')+4));
                 }
             }
-
             if (strpos($line, '@size') !== false) {
                 $type['size'] = trim(substr($line, strpos($line, '@size')+5));
             }
         }
-
         if ($isField) {
             return $type;
         }
-
         return false;
     }
-
     /**
      * @param $field
      * @return bool|\orm\DataBase\fields\Number|PrimaryKey|\orm\DataBase\fields\StringField
      */
     protected function getField($field) {
         $type = $this->getFieldTypeByAnnotation($field);
-
         if ($type === false) return false;
-
         $result = false;
         switch ($type['type']) {
             case 'primary':
@@ -272,10 +241,8 @@ abstract class Resource extends Table
                 $result = Field::number('int', $size);
                 break;
         }
-
         return $result;
     }
-
     /**
      * @return mixed|\orm\Query\QueryGeneratorInterface
      */
@@ -287,7 +254,13 @@ abstract class Resource extends Table
             "QueryGenerator";
         return new $generator_name();
     }
-
+    /**
+     * @return mixed|\orm\Query\QueryGeneratorInterface
+     */
+    private function getCustomQueryGeneratorInstance()
+    {
+        return new \University\Services\Persistence\CustomMysqlQueryGenerator();
+    }
     /**
      * @param $primary_key_new_value
      */
@@ -295,9 +268,13 @@ abstract class Resource extends Table
     {
         foreach ($this->table_fields as $key => $value) {
             if ($value instanceof PrimaryKey) {
-                $this->{$key} = $primary_key_new_value;
+                $setterName = 'set' . ucfirst($key);
+                $this->model->$setterName($primary_key_new_value);
                 break;
             }
         }
+    }
+    protected function afterLoad()
+    {
     }
 }

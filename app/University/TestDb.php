@@ -28,15 +28,21 @@ class TestDb extends Table
     public $surname;
 
     /**
+     * @var int
+     */
+    public     $teachersmood;
+
+    /**
      * TestDb constructor.
      */
     public function __construct()
     {
-        $this->table_name = "student";
+        $this->table_name = "teacher";
         $this->id = Field::primaryKey();
         $this->firstname = Field::varchar(255);
         $this->lastname = Field::varchar(255);
         $this->surname = Field::varchar(255);
+        $this->teachersmood =Field::varchar(255);
         $this->initTable();
     }
 }

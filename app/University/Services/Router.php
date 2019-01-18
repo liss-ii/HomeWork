@@ -1,31 +1,58 @@
 <?php
 
-namespace  University\Services;
+namespace University\Services;
 
+class Router
+{
 
-class Router{
+    /**
+     * @var array
+     */
+    private $routes = [];
 
-    public  $routes = [
-        [
-            "method" => "GET",
-            "path" => "/student/[:id]",
-            "className" => "\University\Assessment\Controller"
+    /**
+     * Router constructor
+     * @param array $routes
+     */
+    public function __construct($routes)
+    {
+        $this->routes = $routes;
+    }
 
-        ]
-    ];
-
-    public  function  dispatch()
+    /**
+     *
+     * Routing entry point
+     * @throws \Exception
+     */
+    public function dispatch()
     {
         $klein = new \Klein\Klein();
 
-
         foreach ($this->routes as $route) {
-            $klein->respond('GET', '/exam/[:id]',
+            $klein->respond(
+                $route['method'],
+                $route['path'],
                 function ($request, $response) use ($route) {
-                    $controller = new  $route['className']();
-                    return $controller->execute($request, $response);
+                    /** @var ControllerInterface $controller */
+                    $controller = DiContainer::getInstance()->get($route['className']);
+                    if ($controller instanceof ControllerInterface) {
+                        return $controller->execute($request, $response);
+                    } else {
+                        throw new SystemException('Controller Class not found');
+                    }
                 });
         }
+
         $klein->dispatch();
     }
+
+    /**
+     * @return \DI\Container
+     * @throws \Exception
+     */
+    private function getDiContainer()
+    {
+        return DiContainer::getInstance();
+    }
+
 }

@@ -17,6 +17,7 @@
         "katzgrau/klogger": "dev-master",
         "sagrishin/lightweight-php-orm": "^1.3",
         "klein/klein": "^2.1",
-    "php-di/php-di": "^6.0"
+    "php-di/php-di": "^6.0",
+    "twig/twig": "^2.6"
     }
 }

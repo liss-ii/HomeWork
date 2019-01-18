@@ -5,7 +5,8 @@ namespace University\Person;
 class Teacher extends Person
 {
     /**
-     * @var $teachersmood float
+     * @var float
+     * @field
      */
     private $teachersmood;
 
