@@ -10,7 +10,7 @@ abstract class Person extends AbstractModel implements PersonInterface
     /**
      * @var string
      */
-    protected $persistenceClass = "University\Person\Persistence\Passenger";
+    protected $persistenceClass = "University\Person\Persistence\Student";
     /**
      * @var string
      * @field

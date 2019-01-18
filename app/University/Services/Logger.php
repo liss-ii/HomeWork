@@ -4,7 +4,7 @@ namespace University\Services;
 
 /**
  * Class Logger
- * @package Shop
+ * @package University
  */
 class Logger
 {

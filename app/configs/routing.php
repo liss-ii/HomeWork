@@ -10,6 +10,41 @@ return [
         ],
         [
             'method' => "GET",
+            'path' => "/teacher/new",
+            'className' => "\University\Person\Controllers\NewControllerTeacher"
+        ],
+        [
+            'method' => "GET",
+            'path' => "/student/new",
+            'className' => "\University\Person\Controllers\ControllerStudentNew"
+        ],
+        [
+            'method' => "POST",
+            'path' => "/student/save",
+            'className' => "\University\Person\Controllers\ControllerStudentSave"
+        ],
+        [
+            'method' => "GET",
+            'path' => "/student/[i:id]",
+            'className' => "\University\Person\Controllers\ControllerStudentView"
+        ],
+        [
+            'method' => "GET",
+            'path' => "/student/[i:id]/edit",
+            'className' => "\University\Person\Controllers\ControllerStudentEdit"
+        ],
+        [
+            'method' => "POST",
+            'path' => "/student/[i:id]/save-edit",
+            'className' => "\University\Person\Controllers\ControllerStudentSaveEdit"
+        ],
+        [
+            'method' => "GET",
+            'path' => "/student/[i:id]/delete",
+            'className' => "\University\Person\Controllers\ControllerStudentDelete"
+        ],
+        [
+            'method' => "GET",
             'path' => "/migrate/",
             'className' => "\University\Services\Database\MigrateController"
         ],

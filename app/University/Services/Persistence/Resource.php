@@ -2,7 +2,7 @@
 
 namespace University\Services\Persistence;
 
-use Aiirport\Services\Persistence\CustomMysqlQueryGenerator;
+use University\Services\Persistence\CustomMysqlQueryGenerator;
 use orm\DataBase\Table;
 use orm\DataBase\Field;
 use orm\DataBase\fields\PrimaryKey;
@@ -12,7 +12,7 @@ use orm\Query\QueryExecutor;
 use orm\Exceptions\MigrationException;
 /**
  * Class Resource
- * @package Airport
+ * @package University
  */
 abstract class Resource extends Table
 {
@@ -29,9 +29,9 @@ abstract class Resource extends Table
      */
     protected $model;
     /**
-     * @param \University\Services\Model\PersistableEntityInterface $model
+     * @param \University\Services\Model\PersistebleEntityInterface $model
      */
-    public function setModel(\University\Services\Model\PersistableEntityInterface $model)
+    public function setModel(\University\Services\Model\PersistebleEntityInterface $model)
     {
         $this->model = $model;
     }
@@ -71,7 +71,7 @@ abstract class Resource extends Table
     }
     /**
      * @param array $params
-     * @return \Airport\Services\Model\PersistableEntityInterface[]
+     * @return \University\Services\Model\PersistebleEntityInterface[]
      */
     public function getCollection($params = [])
     {
@@ -130,7 +130,7 @@ abstract class Resource extends Table
                 ->executeSql();
             return true;
         } catch (\Exception $e) {
-           // throw new MigrationException($e->getMessage());
+            throw new MigrationException($e->getMessage());
         }
     }
     /**
