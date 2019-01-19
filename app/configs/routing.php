@@ -62,6 +62,16 @@ return [
             'method' => "POST",
             'path' => "/exam/save",
             'className' => "\University\Assessment\Controllers\Save"
+        ],
+        [
+            'method' => "GET",
+            'path' => "/search",
+            'className' => "\University\Pages\Search"
+        ],
+        [
+            'method' => "POST",
+            'path' => "/found",
+            'className' => "\University\Pages\Found"
         ]
     ],
 

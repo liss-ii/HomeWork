@@ -2,43 +2,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Homepage</title>
     <style>
-        .main {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .list {
-            margin-top: 30px;
-            margin-right: auto;
-            margin-left: auto;
-            padding: 15px 25px 25px;
+
+        /* CSS */
+        .header-h1 {
+            position: relative;
+            margin-bottom: .5rem;
             text-align: center;
-            width: 500px;
-            font-family: Alias, sans-serif;
+        }
+        .header-h1 h1 {
+            display: inline-block;
+            background: #fff;
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            padding: .5rem 1.5rem;
+            border: .125rem solid #6a1b9a;
+            color: #6a1b9a;
+        }
+        .header-h1 h1::after {
+            content: "";
+            position: absolute;
+            background: #6a1b9a;
+            height: .125rem;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            z-index: -999;
+        }
+        .header-h1-dark h1 {
+            background: #6a1b9a;
+            color: #fff;
+        }
+
+
+
+        .list-counter-circle {
+            list-style: none;
+            counter-reset: list;
+            margin: 0;
+            padding: 0;
+
+            overflow: hidden;
+        }
+        .list-counter-circle>li {
+            position: relative;
+            display: block;
+            height: 2rem;
+            line-height: 2rem;
+            margin-left: 1.75rem;
+            margin-bottom: .25rem;
+            margin-right: 70rem;
+            padding-left: 1rem;
+            padding-right: .5rem;
+            color: #fff;
+            background: #7b1fa2;
+            white-space: nowrap;
+            border-radius: .25rem
+            width: 50px;
+
+        }
+        .list-counter-circle>li:last-child {
+            margin-bottom: 0;
+
+        }
+        .list-counter-circle>li::before {
+            content: counter(list);
+            counter-increment: list;
+            position: absolute;
+            left: -2rem;
+            top: -.25rem;
+            bottom: -.25rem;
+            width: 2.5rem;
+            line-height: 2rem;
+            border-radius: 1.25rem;
+            border: .25rem solid #fff;
+            text-align: center;
+            color: #fff;
+            background: #7b1fa2;
         }
         a {
-            color: black;
-            font-size: 20px;
+            color: white;
+            font-size: 10;
             display: block;
+            line-height: 1rem;
             text-decoration: none;
             padding: 10px;
         }
-        .list > div {
-            background-color: #2F4F4F;
-            margin: 10px 20px 10px 20px;
-            border: 2px solid #8c90ff;
-            border-radius: 10px 100px / 120px;
-        }
+
+
     </style>
+
+
 </head>
-<body class="main">
-<div class="list">
-    <div><b><a href="/student/new">New Student</a></b></div>
-    <div><b><a href="/teacher/new">New Teacher</a></b></div>
-    <div><b><a href="/exam/new">New Exam</a></b></div>
-    <div><b><a href="/search">Search</a></b></div>
+<body >
+<div class="header-h1">
+    <h1>SESSION IN UNIVERSITY</h1>
 </div>
+<div class="list1">
+<ol class="list-counter-circle">
+    <li><a href="/student/new">New Student</a></li>
+    <li><a href="/teacher/new">New Teacher</a></li>
+    <li><a href="/exam/new">New Exam</a></li>
+    <li><a href="/session/new">New Session</a</li>
+    <li><a href="/search">Search</a></li>
+</ol>
+</div>
+
 </body>
 </html>

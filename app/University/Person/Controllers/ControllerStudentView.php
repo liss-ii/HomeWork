@@ -40,9 +40,9 @@ class ControllerStudentView implements \University\Services\ControllerInterface
             return $template->render(array(
                 'id' => $this->student->getId(),
                 'surname' => $this->student->getSurname(),
-                'Firstname' => $this->student->getFirstName(),
-                'LastName' => $this->student->getLastName(),
-                'Knowledge Level' => $this->student->getKnowledgeLevel()
+                'firstname' => $this->student->getFirstName(),
+                'lastname' => $this->student->getLastName(),
+                'knowledgelevel' => $this->student->getKnowledgeLevel()
             ));
         } catch (\Exception $e) {
             $this->logger->debug($e->getMessage(), $e->getTrace());

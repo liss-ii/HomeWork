@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student {{ id }}</title>
+    <style>
+        /* CSS */
+        .header-h1 {
+            position: relative;
+            margin-bottom: .5rem;
+            text-align: center;
+        }
+        .header-h1 h1 {
+            display: inline-block;
+            background: #fff;
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            padding: .5rem 1.5rem;
+            border: .125rem solid #6a1b9a;
+            color: #6a1b9a;
+        }
+        .header-h1 h1::after {
+            content: "";
+            position: absolute;
+            background: #6a1b9a;
+            height: .125rem;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            z-index: -999;
+        }
+        .header-h1-dark h1 {
+            background: #6a1b9a;
+            color: #fff;
+        }
+
+
+
+
+        .main {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .student {
+            background-color: #6a1b9a;
+            margin-top: 30px;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 15px 25px 25px;
+            text-align: center;
+            width: 350px;
+            border: 2px solid #6a1b90;
+            font-family: Alias, sans-serif;
+        }
+        .info {
+            background-color: white;
+            border: 2px solid #6a1b9a;
+            margin-right: 40rem;
+            margin-left: 40rem;
+        }
+
+        input[type=text] {
+            padding-left: 5px;
+            width: 180px;
+            font-size: 16px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        input[type=number] {
+            padding-left: 5px;
+            width: 120px;
+            font-size: 16px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        .layer2 {
+            margin-left: 1rem;
+
+        }
+
+        .edit {
+            width: 100px;
+            display: inline-block;
+           /* background-color: #6a1b9a;*/
+            margin: 15px 20px 0 20px;
+            border: 2px solid #6a1b9a;
+            text-align: center;
+            margin-left: 40rem;
+        }
+        .delete {
+            width: 100px;
+            display: inline-block;
+           /* background-color: #6a1b9a;*/
+            font-color: white;
+            margin: 15px 20px 0 20px;
+            border: 2px solid #6a1b9a;
+            text-align: center;
+        }
+        a {
+            color: black;
+            font-size: 18px;
+            display: block;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body class="main">
+    <div class="header-h1">
+        <h1>Student {{ id }}</h1>
+    </div>
+    <div class="info">
+        <p class="layer2">Firstname: <b>{{ firstname }}</b></p>
+        <p class="layer2">Lastname: <b>{{ lastname }}</b></p>
+        <p class="layer2">Surname: <b>{{ surname }}</b></p>
+        <p class="layer2">Knowledge level: <b>{{ knowledgelevel }}</b></p>
+    </div>
+    <div>
+        <div class="edit">
+            <a href="/student/{{ id }}/edit">Edit</a>
+        </div>
+        <div class="delete">
+            <a href="/student/{{ id }}/delete">Delete</a>
+        </div>
+    </div>
+</body>
+</html>
