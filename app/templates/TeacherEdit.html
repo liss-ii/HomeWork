@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Teacher</title>
+    <style>
+        /* CSS */
+        .header-h1 {
+            position: relative;
+            margin-bottom: .5rem;
+            text-align: center;
+        }
+        .header-h1 h1 {
+            display: inline-block;
+            background: #fff;
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            padding: .5rem 1.5rem;
+            border: .125rem solid #6a1b9a;
+            color: #6a1b9a;
+        }
+        .header-h1 h1::after {
+            content: "";
+            position: absolute;
+            background: #6a1b9a;
+            height: .125rem;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            z-index: -999;
+        }
+        .header-h1-dark h1 {
+            background: #6a1b9a;
+            color: #fff;
+        }
+
+
+        .main {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .info {
+            background-color: white;
+            border: 2px solid #6a1b9a;
+            margin-right: 40rem;
+            margin-left: 40rem;
+        }
+        }
+        .buttonSave {
+            width: 80px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+        input[type=text] {
+            padding-left: 5px;
+            width: 180px;
+            font-size: 16px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        input[type=number] {
+            padding-left: 5px;
+            width: 120px;
+            font-size: 16px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        .layer2 {
+            margin-left: 2rem;
+
+        }
+    </style>
+</head>
+<body class="main">
+<div class="header-h1">
+    <h1>Editing the Teacher {{ id }}</h1>
+</div>
+    <div class="info">
+        <form action="/teacher/{{ id }}/save-edit" method="post">
+            <p class="layer2">Firstname: <input type="text" name="firstname" value="{{ firstname }}"></p>
+            <p class="layer2">Lastname: <input type="text" name="lastname" value="{{ lastname }}"></p>
+            <p class="layer2">Surname: <input type="text" name="surname" value="{{ surname }}"></p>
+            <p class="layer2">Teachers mood:  <input type="number" min="1" pattern="[0-9]" name="teachersmood" value="{{ teachersmood }}"></p>
+            <p class="layer2"><input class="buttonSave" type="submit" value="Save"></p>
+        </form>
+    </div>
+</body>
+</html>

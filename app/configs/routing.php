@@ -10,8 +10,33 @@ return [
         ],
         [
             'method' => "GET",
+            'path' => "/teacher/view",
+            'className' => "\University\Person\Controllers\ControllerTeacherAllView"
+        ],
+        [
+            'method' => "GET",
+            'path' => "/teacher/[i:id]/delete",
+            'className' => "\University\Person\Controllers\ControllerTeacherDelete"
+        ],
+        [
+            'method' => "GET",
+            'path' => "/teacher/[i:id]/edit",
+            'className' => "\University\Person\Controllers\ControllerTeacherEdit"
+        ],
+        [
+            'method' => "GET",
             'path' => "/teacher/new",
-            'className' => "\University\Person\Controllers\NewControllerTeacher"
+            'className' => "\University\Person\Controllers\ControllerTeacherNew"
+        ],
+        [
+            'method' => "POST",
+            'path' => "/teacher/save",
+            'className' => "\University\Person\Controllers\ControllerTeacherSave"
+        ],
+        [
+            'method' => "POST",
+            'path' => "/teacher/[i:id]/save-edit",
+            'className' => "\University\Person\Controllers\ControllerTeacherSaveEdit"
         ],
         [
             'method' => "GET",
